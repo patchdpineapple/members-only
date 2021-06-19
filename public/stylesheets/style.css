@@ -1,8 +1,128 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;800;900&display=swap');
+
+/* 
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+$container-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px
+);
+*/
+
+:root {
+    --main: #9ef01a;
+    --main2: #00a5cf;
+    --secondary: #ef476f;
+    --white: #f4f4f4;
+    --text-dark: #333;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;  
+    font-family: 'Kanit', sans-serif;
 }
 
 a {
-  color: #00B7FF;
+    text-decoration: none;
+}
+
+.form-control:focus {
+    border-color: #fe86c286;
+    box-shadow: 0 0 0 .25rem #ef476ec0;
+}
+
+/* STYLES */
+/* Header */
+.main-header {
+    background-color: var(--main);
+    box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.25);
+}
+
+.main-header form {
+    flex-wrap: nowrap;
+    max-width: 500px;
+}
+
+.header-logo {
+    font-size: 3rem;
+    font-family: 'Bungee', cursive;
+    color: #333;
+}
+
+.login input {
+    min-width: 100px;
+}
+
+
+.login .btn {
+    padding: 2px 1rem;
+    font-size: .9rem;
+}
+
+.login .btn-login {
+    background-color: var(--secondary);
+    border: 2px solid var(--secondary);
+}
+
+.login .btn-signup {
+    background-color: transparent;
+    white-space: nowrap;
+    color: var(--secondary);
+    padding: 0;
+
+}
+
+.login .btn-login:hover {
+    background-color: #333;
+    border: 2px solid #333;
+    color: white;
+}
+
+.login .btn-signup:hover {
+    color: #333;
+}
+
+/* Sign Up */
+.signup {
+    /* background: steelblue; */
+    width: 500px;
+}
+
+
+/* MEDIA QUERIES */
+@media (max-width: 991px) {
+    .header-logo {
+        font-size: 2rem;
+    }
+
+    .login input {
+        min-width: 75px;
+    }
+    
+}
+
+@media (max-width: 575px) {
+    
+    .login input {
+        min-width: 50px;
+        max-width: 100px;
+    }
+
+    .login > div {
+        padding-right: 4px;
+        padding-left: 4px;
+    }
 }

@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  section.container-fluid.mt-4.d-flex.justify-content-center
+    form.signup(action="")
+      div.form-group.row.mb-4
+        div.col-6
+          label.form-label(for="first_name") First Name
+          input#first_name.form-control(type="text" name="first_name" placeholder="John") 
+        div.col-6
+          label.form-label(for="family_name") Family Name
+          input#family_name.form-control(type="text" name="family_name" placeholder="Doe")
+      div.form-group.row.flex-column.mb-4
+        div.col-6.mb-3
+          label.form-label(for="signup_username") Username
+          input#signup_username.form-control(type="text" name="username" placeholder="John") 
+        div.col-6.mb-3
+          label.form-label(for="signup_password") Password
+          input#signup_password.form-control(type="password" name="family_name" placeholder="Doe")
+        div.col-6
+          input#signup_admin.form-checkbox(type="checkbox" name="admin" value="true")
+          label.form-label(for="signup_admin") Admin account
+
+      button.btn-submit-signup.btn.btn-primary(type="submit") Submit
