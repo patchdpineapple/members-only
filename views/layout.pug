@@ -13,17 +13,20 @@ html(lang="en")
           a(href="/")
             div.header-logo PATCHCLUB
         div.col-12.col-md-8.col-lg-6.p-0.d-flex.justify-content-center
-          form.login.row.align-items-center.h-100.pb-2.pb-md-0(action="" method="POST")
-            div.col-auto.col-sm-4.d-flex
-              label.form-label.visually-hidden(for="username") Username
-              input#login_username.form-control.form-control-sm(type="text" name="username" placeholder="username")
-            div.col-auto.col-sm-4.d-flex
-              label.form-label.visually-hidden(for="password") Password
-              input#login_password.form-control.form-control-sm(type="password" name="password" placeholder="password")
-            div.col-auto.col-sm-2.d-flex
-              button.btn-login.btn(type="submit") Login
-            div.col-auto.col-sm-2.d-flex
-              a.btn-signup.btn(href="/club/sign-up") Sign up
+          if !user
+            form.login.row.align-items-center.h-100.pb-2.pb-md-0(action="" method="POST")
+              div.col-auto.col-sm-4.d-flex
+                label.form-label.visually-hidden(for="username") Username
+                input#login_username.form-control.form-control-sm(type="text" name="username" placeholder="username")
+              div.col-auto.col-sm-4.d-flex
+                label.form-label.visually-hidden(for="password") Password
+                input#login_password.form-control.form-control-sm(type="password" name="password" placeholder="password")
+              div.col-auto.col-sm-2.d-flex
+                button.btn-login.btn(type="submit") Login
+              div.col-auto.col-sm-2.d-flex
+                a.btn-signup.btn(href="/club/sign-up") Sign up
+          else 
+            h3 Logged in: #{ user.username }
         
 
     block content
