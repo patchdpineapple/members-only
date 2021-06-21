@@ -63,6 +63,6 @@ router.get("/log-out", user_controller.logout_get);
 router.get('/sign-up', user_controller.signup_get);
 
 // POST Sign up form
-router.post('/sign-up', user_controller.signup_post);
+router.post('/sign-up', user_controller.signup_post, user_controller.login_post);
 
 module.exports = router;

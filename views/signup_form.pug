@@ -3,7 +3,7 @@ extends layout
 block content
   section.container-fluid.mt-4.d-flex.flex-column.justify-content-center.align-items-center
     h1.mb-4 Sign up. Join the Club!
-    form.signup(action="" method="POST")
+    form.signup(action="/club/sign-up" method="POST")
       div.form-group.row.mb-4
         div.col-6
           label.form-label(for="first_name") First Name
@@ -24,9 +24,8 @@ block content
             input#signup_confirm.form-control(type="password" name="confirm" placeholder="confirm password")  
       div.form-group.row.flex-column.mb-4
         div.col-6
-          input#signup_admin.form-check-input(type="checkbox" name="admin" value="true" checked=(undefined === user_signup ? "" : user_signup.admin))
+          input#signup_admin.form-check-input(type="checkbox" name="admin" value="true")
           label.form-check-label(for="signup_admin") &nbsp;Admin account
-
       button.btn-submit-signup.btn.btn-primary(type="submit") Submit
 
     if errors

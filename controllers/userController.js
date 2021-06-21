@@ -6,13 +6,20 @@ var router = express.Router();
 
 // Require models
 var User = require('../models/user');
+var Message = require('../models/message');
 
 const passport = require("passport");
 
 // MIDDLEWARE FUNCTIONS
 // Display Home Page
-exports.index = function(req, res) {
-    res.render("index", { title: "Home Page", user: req.user });
+exports.index = function(req, res, next) {
+    Message.find({})
+    .populate("author")
+    .exec(function(err, messages){
+        if(err) { return next(err); }
+        res.render("index", { title: "All Messages", messages: messages, user: req.user });
+
+    })
 };
 
 // Post login details
@@ -34,6 +41,15 @@ exports.signup_get = function(req, res) {
 
 // Post signup details
 exports.signup_post = [
+    (req, res, next) => {
+        if(req.body.admin === undefined) {
+            req.body.admin = "false";
+        } else {
+            req.body.admin = "true";
+        } 
+        next();
+    },
+
     // validation and sanitization
     body('first_name').trim().isLength({ min: 1 }).escape().withMessage('First name must be specified.')
         .isAlphanumeric().withMessage('First name has non-alphanumeric characters.'),
@@ -43,12 +59,7 @@ exports.signup_post = [
     body("password", "Password must not be empty").trim().isLength({min:1}).escape(),
     body("confirm", "Confirm Password must have same value as password field").exists()
         .custom((value, { req }) => value === req.body.password),
-    body("admin").escape()
-        .customSanitizer( value => {
-            if(value === "") {
-                value = "false";
-            }
-        }),
+    body("admin").escape(),
 
     // Process request after validation and sanitization.
     (req, res, next) => {
@@ -75,13 +86,18 @@ exports.signup_post = [
             
                 // otherwise, store hashedPassword in DB
                 user.password = hashedPassword;
+                console.log(`admin: ${req.body.admin} type: ${typeof req.body.admin}`);
+                console.log(`req.body.admin === true: ${req.body.admin === "true"}`);
+
                 if(req.body.admin === "true") {
                     user.membership = "Exclusive";
+                    console.log(`membership: ${user.membership}`);
                 }
                 user.save(function(err) {
                     if(err) { return next(err); }
-                    // Successful - redirect to new author record.
-                    res.redirect("/");
+                    // Successful - automatically login new user
+                    // res.redirect("/");
+                    next();
                 });
               });
         }
