@@ -1,8 +1,26 @@
 extends layout
 
 block content
-  if (user && user.membership === "Exclusive")
-    h1 #{title} Exclusive
-  else
-    h1 #{title} Basic
+  if user
+    a.btn-new-msg.btn.d-flex.justify-content-center.align-items-center(href="#messages")
+      span.material-icons add
+
+  section#messages.messages.container-fluid.mt-4.d-flex.flex-column.justify-content-center.align-items-center
+    if (user && user.membership === "Exclusive")
+      h1 #{title} Exclusive
+    else
+      h1 #{title} Basic
+
+    div.messages-container.container.d-flex.flex-column.justify-content-center.align-items-center
+      each message in messages
+        div.card.mb-4(style="width: 24rem;")
+          div.card-body
+            h4.card-title #{message.title}
+            p.card-text #{message.text}
+            if user && user.membership === "Exclusive"
+              p poster by: Sample Author
+              p date posted: #{message.timestamp_formatted}
+
+
+  
 

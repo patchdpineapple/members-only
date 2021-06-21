@@ -13,20 +13,22 @@ var MessageSchema = new Schema({
 MessageSchema
 .virtual("timestamp_formatted")
 .get(function() {
-    return DateTime.fromJSDate(this.due_back).toLocaleString(DateTime.DATE_MED);
+    return this.timestamp ? 
+    DateTime.fromJSDate(this.timestamp).toLocaleString(DateTime.DATE_MED) 
+    : "";
 });
 
 MessageSchema
 .virtual("timestamp_form")
 .get(function() {
-    return DateTime.fromJSDate(this.due_back).toISODate();
+    return DateTime.fromJSDate(this.timestamp).toISODate();
 });
 
 // Virtual for User's url
 MessageSchema
 .virtual("url")
 .get(function() {
-    return "/club/member/" + this._id;
+    return "/club/message/" + this._id;
 });
 
 // Export model

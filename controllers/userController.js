@@ -36,7 +36,7 @@ exports.logout_get =  function(req, res) {
     
 // Get signup page
 exports.signup_get = function(req, res) {
-    res.render("signup_form", { title: "Signup" });
+    res.render("signup_form", { title: "Signup", user: req.user });
 };
 
 // Post signup details

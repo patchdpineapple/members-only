@@ -37,7 +37,18 @@ $container-widths: (
 
 a {
     text-decoration: none;
+    color: var(--secondary);
 }
+
+a:hover {
+    color: #333 !important;
+}
+
+.btn:focus {
+    border: none;
+    box-shadow: none;
+}
+
 
 .form-control:focus {
     border-color: #fe86c286;
@@ -82,7 +93,6 @@ a {
     white-space: nowrap;
     color: var(--secondary);
     padding: 0;
-
 }
 
 .login .btn-login:hover {
@@ -91,15 +101,36 @@ a {
     color: white;
 }
 
-.login .btn-signup:hover {
-    color: #333;
-}
-
 /* Sign Up */
 .signup {
     /* background: steelblue; */
     width: 500px;
 }
+
+/* MESSAGES */
+.card {
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    background: var(--main);
+    box-shadow: 0 5px 10px 2px rgba(0, 0, 0, .25);
+}
+
+.btn-new-msg {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    background-color: var(--secondary);
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+}
+
+.btn-new-msg > .material-icons {
+    font-size: 3rem;
+}
+
 
 
 /* MEDIA QUERIES */
@@ -111,7 +142,6 @@ a {
     .login input {
         min-width: 75px;
     }
-    
 }
 
 @media (max-width: 575px) {
@@ -124,5 +154,33 @@ a {
     .login > div {
         padding-right: 4px;
         padding-left: 4px;
+    }
+
+    /* Sign Up */
+    .signup {
+        /* background: steelblue; */
+        width: 100%;
+    }
+
+    .signup > .form-group {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .signup > .form-group > div {
+        min-width: 80% !important;
+    }
+
+    .signup #first_name {
+        margin-bottom: 1rem;
+    }
+
+    .signup #signup_password {
+        margin-bottom: 1rem;
+    }
+
+    .btn-submit-signup {
+        display: block;
+        margin: 0 auto;
     }
 }

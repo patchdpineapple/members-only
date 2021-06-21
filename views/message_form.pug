@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  section.container-fluid.mt-4.d-flex.flex-column.justify-content-center.align-items-center
+    if !user
+      h1.mb-4 What's on your mind?
+      form.signup(action="/club/message/create" method="POST")
+        div.form-group.row.mb-3
+          div.col-6
+            label.form-label(for="title") Title
+            input#title.form-control(type="text" name="title" placeholder="Title" value=(undefined === message ? "" : message.title)) 
+        div.form-group.row.flex-column.mb-3
+          div.col-6
+            label.form-label(for="message") Message
+            textarea#message.form-control(name="text" placeholder="Hello" value=(undefined === message ? "" : message.text))
+        button.btn-submit-signup.btn.btn-primary(type="submit") Post
+
+      if errors
+        ul.mt-4
+          for error in errors
+            li.text-danger!= error.msg
+
+    else 
+      h1.mb-4 Login to post a new message
+            
