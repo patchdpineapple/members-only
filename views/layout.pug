@@ -27,10 +27,19 @@ html(lang="en")
               div.col-auto.col-sm-2.d-flex
                 a.btn-signup.btn(href="/club/sign-up") Sign up
           else
-              div.d-flex.align-items-center
-                  h4.m-0 User: #{ user.name }
-                  span.ms-4
-                    a(href="/club/log-out") Log out  
+              div.d-flex.flex-column.justify-content-center
+                div.d-flex.align-items-center
+                    h4.m-0 User: #{ user.name }
+                    
+                div.d-flex.align-items-center
+                    span.m-0 Status: #{ user.membership }
+                    if user.membership === "Basic"
+                      span.ms-4
+                        a.btn-join(href="/club/join") Join Exclusive
+                    span.ms-4
+                      a(href="/club/log-out") Log out  
+              
+              
         
 
     block content

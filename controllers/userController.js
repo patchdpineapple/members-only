@@ -36,7 +36,7 @@ exports.logout_get =  function(req, res) {
     
 // Get signup page
 exports.signup_get = function(req, res) {
-    res.render("signup_form", { title: "Signup", user: req.user });
+    res.render("user_signup_form", { title: "Signup", user: req.user });
 };
 
 // Post signup details
@@ -75,7 +75,7 @@ exports.signup_post = [
 
         if(!errors.isEmpty()) {
             // There are errors. Render form again with sanitized values/errors messages.
-            res.render('signup_form', { title: 'Signup', user_signup: user, errors: errors.array() });
+            res.render('user_signup_form', { title: 'Signup', user_signup: user, errors: errors.array() });
             return;
         } else {
             bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
@@ -95,6 +95,37 @@ exports.signup_post = [
                     next();
                 });
               });
+        }
+    }
+]
+
+// Get Join Exclusive Page
+exports.join_get = function(req, res) {
+    res.render("user_join_form", { title: "Join Exclusive", user: req.user });
+};
+
+// Get Join Exclusive Page
+exports.join_post = [
+
+    // Validation and sanitization
+    body("password").trim().isLength({min:1}).escape().withMessage("Secret Password must not be empty")
+        .custom((value, { req }) => value === "patch").withMessage("Wrong secret password"),
+
+    // Process request
+    (req, res, next) => {
+        var errors = validationResult(req);
+
+        if(!errors.isEmpty()){
+            // There are errors. Render form again with sanitized values/errors messages.
+            res.render("user_join_form", { title: "Join Exclusive", user: req.user, errors: errors.array() });
+            return;
+        } 
+        else {
+            User.findByIdAndUpdate(req.user._id, { "membership": "Exclusive" }, {}, function updateUser(err, updatedUser) {
+                if (err) { return next(err); }
+                   // Successful - redirect to index
+                   res.redirect("/");
+                });
         }
     }
 ]
