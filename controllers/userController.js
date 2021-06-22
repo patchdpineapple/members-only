@@ -86,17 +86,12 @@ exports.signup_post = [
             
                 // otherwise, store hashedPassword in DB
                 user.password = hashedPassword;
-                console.log(`admin: ${req.body.admin} type: ${typeof req.body.admin}`);
-                console.log(`req.body.admin === true: ${req.body.admin === "true"}`);
-
                 if(req.body.admin === "true") {
                     user.membership = "Exclusive";
-                    console.log(`membership: ${user.membership}`);
                 }
                 user.save(function(err) {
                     if(err) { return next(err); }
-                    // Successful - automatically login new user
-                    // res.redirect("/");
+                    // Successful - run next middleware to automatically login user
                     next();
                 });
               });

@@ -2,7 +2,7 @@ extends layout
 
 block content
   if user
-    a.btn-new-msg.btn.d-flex.justify-content-center.align-items-center(href="#messages")
+    a.btn-new-msg.btn.d-flex.justify-content-center.align-items-center(href="/club/message/create")
       span.material-icons add
 
   section#messages.messages.container-fluid.mt-4.d-flex.flex-column.justify-content-center.align-items-center
@@ -18,8 +18,13 @@ block content
             h4.card-title #{message.title}
             p.card-text #{message.text}
             if user && user.membership === "Exclusive"
-              p poster by: Sample Author
-              p date posted: #{message.timestamp_formatted}
+                if message.author
+                  p posted by:  #{message.author.username}
+                else 
+                  p posted by: Sample author
+            p date posted: #{message.timestamp_formatted}
+            if user && user.admin
+              a.btn-delete.btn(href=message.url) Delete
 
 
   

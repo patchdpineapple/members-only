@@ -4,6 +4,8 @@ const bcrypt = require("bcryptjs");
 
 // Require controller modules.
 var user_controller = require('../controllers/userController');
+var message_controller = require('../controllers/messageController');
+
 
 // setup session and passport
 const session = require("express-session");
@@ -67,10 +69,10 @@ router.get('/sign-up', user_controller.signup_get);
 router.post('/sign-up', user_controller.signup_post, user_controller.login_post);
 
 // GET Create message form
-// router.get('/message/create', user_controller.message_create_get);
+router.get('/message/create', message_controller.message_create_get);
 
-// // POST Create message form
-// router.post('/message/create', user_controller.message_create_post);
+// POST Create message form
+router.post('/message/create', message_controller.message_create_post);
 
 // // GET Delete message page
 // router.get('/message/:id/delete', user_controller.message_delete_get);
