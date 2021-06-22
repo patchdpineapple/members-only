@@ -101,6 +101,10 @@ a:hover {
     color: white;
 }
 
+.text-exclusive {
+    background-color: blue;
+}
+
 /* Sign Up */
 .signup {
     /* background: steelblue; */
