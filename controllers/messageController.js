@@ -49,3 +49,24 @@ exports.message_create_post = [
         }
     }
 ]
+
+exports.message_delete_get = function(req, res, next) {
+    Message.findById(req.params.id)
+    .populate("author")
+    .exec(function(err, message){
+        if(err) { return next(err); }
+        if(message==null) {
+            res.redirect('/');
+        }
+        // Success, render messae delete page
+        res.render("message_delete", { title: "Delete Message", user: req.user, message: message })
+    });
+};
+
+exports.message_delete_post = function(req, res, next) {
+    Message.findByIdAndRemove(req.body.messageid, function deleteMessage(err) {
+        if (err) { return next(err); }
+        // Success - go to index
+        res.redirect('/');
+    });
+};

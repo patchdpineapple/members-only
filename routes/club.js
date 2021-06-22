@@ -75,9 +75,9 @@ router.get('/message/create', message_controller.message_create_get);
 router.post('/message/create', message_controller.message_create_post);
 
 // // GET Delete message page
-// router.get('/message/:id/delete', user_controller.message_delete_get);
+router.get('/message/:id/delete', message_controller.message_delete_get);
 
-// // POST Delete message page
-// router.post('/message/:id/delete', user_controller.message_delete_post);
+// POST Delete message page
+router.post('/message/:id/delete', message_controller.message_delete_post);
 
 module.exports = router;

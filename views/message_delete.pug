@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  section#message-delete.container-fluid.mt-4.d-flex.flex-column.justify-content-center.align-items-center
+    h1 Title: #{message.title}
+    p message: #{message.text}
+    if message.author
+        p author:  #{message.author.username}
+    else 
+        p author: No author
+    p date posted: #{message.timestamp_formatted}
+    br
+    if user && user.admin
+        p Are you sure you want to delete this message?
+        form(method='POST' action='')
+            div.form-group
+                input#messageid.form-control(type='hidden', name='messageid', required='true', value=message._id )
+
+            button.btn.btn-primary(type='submit') Delete
+    else
+        p Log in as admin to delete this message.
