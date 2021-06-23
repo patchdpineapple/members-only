@@ -38,7 +38,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 // Use session and passport middleware, define strrategy
-app.use(session({ secret: process.env.SN_SCRT, resave: false, saveUninitialized: true }));
+var scrt = process.env.PROD_SCRT || process.env.SN_SCRT;
+app.use(session({ secret: scrt, resave: false, saveUninitialized: true }));
 
 app.use(logger('dev'));
 app.use(express.json());
