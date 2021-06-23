@@ -32,15 +32,11 @@ html(lang="en")
                     h4.m-0 User: #{ user.name }
                     
                 div.d-flex.align-items-center
-<<<<<<< HEAD
                     if user.membership === "Exclusive"
                       span.m-0 Membership: #[span.text-exclusive #{ user.membership }] 
                     else
                       span.m-0 Membership: #[span.text-basic #{ user.membership }] 
                     
-=======
-                    span.m-0 Status: #{ user.membership }
->>>>>>> 4db401925b08006f2ee6e57dad47e72e799abe0b
                     if user.membership === "Basic"
                       span.ms-4
                         a.btn-join(href="/club/join") Join Exclusive
