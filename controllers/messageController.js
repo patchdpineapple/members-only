@@ -1,12 +1,10 @@
 const { body, validationResult } = require("express-validator");
-const async = require("async");
 var express = require('express');
 var router = express.Router();
 
 // Require models
 var User = require('../models/user');
 var Message = require('../models/message');
-
 
 // MIDDLEWARE FUNCTIONS
 // Display Message create page
@@ -30,11 +28,6 @@ exports.message_create_post = [
             timestamp: Date(),
             author: req.user._id
         });
-
-        console.log(`title: ${req.body.title}`);
-        console.log(`text: ${req.body.text}`);
-        console.log(`message text: ${message.text}`);
-
 
         if(!errors.isEmpty()){
              // There are errors. Render form again with sanitized values/errors messages.

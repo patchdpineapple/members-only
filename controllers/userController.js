@@ -1,6 +1,5 @@
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
-const async = require("async");
 var express = require('express');
 var router = express.Router();
 
@@ -19,7 +18,6 @@ exports.index = function(req, res, next) {
     .exec(function(err, messages){
         if(err) { return next(err); }
         res.render("index", { title: "All Messages", messages: messages, user: req.user });
-
     })
 };
 
@@ -110,7 +108,7 @@ exports.join_post = [
 
     // Validation and sanitization
     body("password").trim().isLength({min:1}).escape().withMessage("Secret Password must not be empty")
-        .custom((value, { req }) => value === "patch").withMessage("Wrong secret password"),
+        .custom((value) => value === "patch").withMessage("Wrong secret password"),
 
     // Process request
     (req, res, next) => {

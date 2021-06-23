@@ -6,21 +6,23 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-// setup session and passport
+// require session 
 const session = require("express-session");
-// const passport = require("passport");
-// const LocalStrategy = require("passport-local").Strategy;
 
 // import models
 var User = require('./models/user');
 
 // import routers
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var clubRouter = require('./routes/club');
+var compression = require('compression');
+var helmet = require('helmet');
 
 // create express app
 var app = express();
+
+// set appropriate HTTP headers 
+app.use(helmet());
 
 // setup mongoose connection
 var mongoose = require("mongoose");
@@ -38,43 +40,6 @@ app.set('view engine', 'pug');
 // Use session and passport middleware, define strrategy
 app.use(session({ secret: process.env.SN_SCRT, resave: false, saveUninitialized: true }));
 
-// Define strategy
-// passport.use(
-//   new LocalStrategy((username, password, done) => {
-//     User.findOne({ username: username }, (err, user) => {
-//       if (err) {
-//         return done(err);
-//       }
-//       if (!user) {
-//         return done(null, false, { message: "Incorrect username" });
-//       }
-
-//       bcrypt.compare(password, user.password, (err, res) => {
-//         if (res) {
-//           // passwords match! log user in
-//           return done(null, user);
-//         } else {
-//           // passwords do not match!
-//           return done(null, false, { message: "Incorrect password" });
-//         }
-//       });
-//     });
-//   })
-// );
-
-// passport.serializeUser(function (user, done) {
-//   done(null, user.id);
-// });
-
-// passport.deserializeUser(function (id, done) {
-//   User.findById(id, function (err, user) {
-//     done(err, user);
-//   });
-// });
-
-// app.use(passport.initialize());
-// app.use(passport.session());
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -86,10 +51,12 @@ app.use((req, res, next) => {
   next();
 });
 
+// Compress routes
+app.use(compression());
+
 // Routes
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/club', clubRouter);
 
 // catch 404 and forward to error handler
