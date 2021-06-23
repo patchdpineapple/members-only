@@ -11,8 +11,8 @@ html(lang="en")
     header.container-fluid
       div.main-header.row
         div.col-12.col-md-4.col-lg-6.p-0.d-flex.justify-content-center
-          a(href="/")
-            div.header-logo PATCHCLUB
+          a.header-logo(href="/")
+            div PATCH#[span.logo-club CLUB]
         div.col-12.col-md-8.col-lg-6.p-0.d-flex.justify-content-center
           if !user
             form.login.row.align-items-center.h-100.pb-2.pb-md-0(action="/club/log-in" method="POST")
@@ -32,7 +32,11 @@ html(lang="en")
                     h4.m-0 User: #{ user.name }
                     
                 div.d-flex.align-items-center
-                    span.m-0 Status: #{ user.membership }
+                    if user.membership === "Exclusive"
+                      span.m-0 Membership: #[span.text-exclusive #{ user.membership }] 
+                    else
+                      span.m-0 Membership: #[span.text-basic #{ user.membership }] 
+                    
                     if user.membership === "Basic"
                       span.ms-4
                         a.btn-join(href="/club/join") Join Exclusive

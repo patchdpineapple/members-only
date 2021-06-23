@@ -12,7 +12,7 @@ block content
         div.form-group.row.flex-column.mb-3
           div.col-12
             label.form-label(for="message") Message
-            textarea#message.form-control(name="text" placeholder="Hello" value=(undefined === message ? "" : message.text))
+            textarea#message.message-textarea.form-control(name="text" placeholder="Hello" value=(undefined === message ? "" : message.text))
         button.btn-submit-signup.btn.btn-primary(type="submit") Post
 
       if errors

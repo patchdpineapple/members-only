@@ -1,25 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;800;900&display=swap');
 
-/* 
-$grid-breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px,
-  xxl: 1400px
-);
-
-$container-widths: (
-  sm: 540px,
-  md: 720px,
-  lg: 960px,
-  xl: 1140px,
-  xxl: 1320px
-);
-*/
-
 :root {
     --main: #9ef01a;
     --main2: #00a5cf;
@@ -49,7 +30,6 @@ a:hover {
     box-shadow: none;
 }
 
-
 .form-control:focus {
     border-color: #fe86c286;
     box-shadow: 0 0 0 .25rem #ef476ec0;
@@ -67,16 +47,19 @@ a:hover {
     max-width: 500px;
 }
 
-.header-logo {
+.header-logo * {
     font-size: 3rem;
     font-family: 'Bungee', cursive;
     color: #333;
 }
 
+.header-logo .logo-club {
+    color: var(--secondary);
+}
+
 .login input {
     min-width: 100px;
 }
-
 
 .login .btn {
     padding: 2px 1rem;
@@ -102,24 +85,42 @@ a:hover {
 }
 
 .text-exclusive {
-    background-color: blue;
+    color: #333;
+}
+
+.text-basic {
+    color: red;
 }
 
 /* Sign Up */
 .signup {
-    /* background: steelblue; */
     width: 500px;
 }
 
 /* MESSAGES */
 /* index */
-.card {
-    background: var(--main);
+.message-card {
     box-shadow: 0 5px 10px 2px rgba(0, 0, 0, .25);
+    width: 400px;
+    background-color: var(--secondary);
+    
+}
+
+.message-card .card-body {
+    padding: .5rem;
+    background-color: #fff;
+}
+
+.message-author, .message-time {
+    color: #444;
+    font-size: .8rem;
 }
 
 .btn-delete {
     background-color: var(--secondary);
+    background-color: transparent;
+    color: red;
+    padding: 1px 3px;
 }
 
 .btn-new-msg {
@@ -134,22 +135,22 @@ a:hover {
     border-radius: 50%;
 }
 
-
-
 .btn-new-msg > .material-icons {
     font-size: 3rem;
 }
 
 /* message form */
 .message-form {
-    min-width: 500px;
-    max-width: 100vw;
+    width: 500px;
 }
 
-
+.message-textarea {
+    height: 150px;
+}
 
 /* MEDIA QUERIES */
 @media (max-width: 991px) {
+    /* Header */
     .header-logo {
         font-size: 2rem;
     }
@@ -160,7 +161,7 @@ a:hover {
 }
 
 @media (max-width: 575px) {
-    
+    /* Header */
     .login input {
         min-width: 50px;
         max-width: 100px;
@@ -171,9 +172,14 @@ a:hover {
         padding-left: 4px;
     }
 
+    /* MESSAGES */
+    /* index */
+    .message-card {
+        width: 95vw;
+    }
+
     /* Sign Up */
     .signup {
-        /* background: steelblue; */
         width: 100%;
     }
 
@@ -197,5 +203,21 @@ a:hover {
     .btn-submit-signup {
         display: block;
         margin: 0 auto;
+    }
+
+    /* message form */
+    .message-form {
+        width: 100%;
+    }
+
+    .message-textarea {
+        height: 200px;
+    }
+}
+
+@media (max-width: 359px) {
+    .login input {
+        width: 75px;
+        font-size: .8rem;
     }
 }

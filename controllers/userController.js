@@ -14,6 +14,7 @@ const passport = require("passport");
 // Display Home Page
 exports.index = function(req, res, next) {
     Message.find({})
+    .sort({ timestamp: -1 })
     .populate("author")
     .exec(function(err, messages){
         if(err) { return next(err); }

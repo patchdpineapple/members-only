@@ -6,25 +6,25 @@ block content
       span.material-icons add
 
   section#messages.messages.container-fluid.mt-4.d-flex.flex-column.justify-content-center.align-items-center
-    if (user && user.membership === "Exclusive")
-      h1 #{title} Exclusive
-    else
-      h1 #{title} Basic
-
+    h1 #{title} 
     div.messages-container.container.d-flex.flex-column.justify-content-center.align-items-center
+      if messages.length === 0
+        h2 No messages yet...
       each message in messages
-        div.card.mb-4(style="width: 24rem;")
+        div.message-card.card.mb-4.p-3
           div.card-body
-            h4.card-title #{message.title}
-            p.card-text #{message.text}
+            div.message-wrapper
+              h4.card-title #{message.title}
+              p.card-text #{message.text}
             if user && user.membership === "Exclusive"
-                if message.author
-                  p author:  #{message.author.username}
-                  p date posted: #{message.timestamp_formatted}
-                else 
-                  p author: No author
+              hr.my-2
+              div.d-flex.flex-row
+                i.message-author post by: #{message.author.username}
+                i.message-time.ms-1 - #{message.timestamp_formatted}   
+              
             if user && user.admin
-              a.btn-delete.btn(href=message.url+"/delete") Delete
+              div.d-flex.justify-content-end
+                a.btn-delete.btn(href=message.url+"/delete") Delete
 
 
   
