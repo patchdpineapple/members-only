@@ -3,14 +3,23 @@ extends layout
 block content
   section.container-fluid.mt-4.d-flex.flex-column.justify-content-center.align-items-center
     if user && user.membership === "Basic"
+<<<<<<< HEAD
       h1.mb-4.text-center Wanna be an Exclusive member? Enter secret password.
+=======
+      h1.mb-4 Wanna be an Exclusive member? Enter secret password.
+>>>>>>> 4db401925b08006f2ee6e57dad47e72e799abe0b
       form.signup(action="/club/join" method="POST")
         div.form-group.row.mb-3
             div.col-12
               label.form-label(for="join_password") Secret Password
+<<<<<<< HEAD
               input#join_password.form-control.form-control-lg(type="text" name="password" placeholder="")
               div.form-text.text-center #[em hint: "patch"]
         button.btn-submit-join.btn.btn-primary(type="submit") Submit
+=======
+              input#join_password.form-control(type="password" name="password" placeholder="secret password")
+        button.btn-submit-signup.btn.btn-primary(type="submit") Submit
+>>>>>>> 4db401925b08006f2ee6e57dad47e72e799abe0b
 
       if errors
         ul.mt-4

@@ -108,7 +108,11 @@ exports.join_post = [
 
     // Validation and sanitization
     body("password").trim().isLength({min:1}).escape().withMessage("Secret Password must not be empty")
+<<<<<<< HEAD
         .custom((value) => value === "patch").withMessage("Wrong secret password"),
+=======
+        .custom((value, { req }) => value === "patch").withMessage("Wrong secret password"),
+>>>>>>> 4db401925b08006f2ee6e57dad47e72e799abe0b
 
     // Process request
     (req, res, next) => {
